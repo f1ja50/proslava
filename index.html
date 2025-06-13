@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dobrodošli na proslavu!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f5;
+      text-align: center;
+      padding: 60px;
+    }
+    h1 {
+      color: #8b0000;
+      font-size: 3em;
+    }
+    input, button {
+      font-size: 1em;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #8b0000;
+      color: white;
+      cursor: pointer;
+    }
+    .rezultat {
+      margin-top: 30px;
+      font-size: 1.5em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dobrodošli na slavlje!</h1>
+  <p>Unesite svoje ime da saznate broj stola:</p>
+  <input type="text" id="ime" placeholder="Na primer: Marko">
+  <button onclick="traziSto()">Traži</button>
+
+  <div class="rezultat" id="rezultat"></div>
+
+  <script>
+    const gosti = {
+      "Marko": 1,
+      "Jovana": 2,
+      "Ana Petrović": 3,
+      "Nikola": 4,
+      "Milica": 5
+    };
+
+    function traziSto() {
+      const ime = document.getElementById("ime").value.trim();
+      const rezultat = document.getElementById("rezultat");
+      const sto = gosti[ime];
+      if (sto) {
+        rezultat.innerText = `${ime}, vaš sto je broj ${sto}.`;
+      } else {
+        rezultat.innerText = `Žao nam je, ime "${ime}" nije pronađeno.`;
+      }
+    }
+  </script>
+</body>
+</html>
