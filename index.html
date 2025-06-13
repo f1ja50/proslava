@@ -2,6 +2,7 @@
 <html lang="sr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dobrodošli na proslavu</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
   <style>
@@ -22,43 +23,63 @@
     }
 
     p {
-      font-size: 1.1em;
+      font-size: 1.3em;
       margin-bottom: 40px;
       color: #6b6b6b;
     }
 
     input {
-      padding: 12px;
-      font-size: 1em;
+      padding: 14px;
+      font-size: 1.1em;
       border: 1px solid #d1cfc8;
       border-radius: 10px;
-      width: 250px;
+      width: 80%;
+      max-width: 320px;
       background-color: #fdfdfc;
     }
 
     button {
-      padding: 12px 24px;
-      font-size: 1em;
+      padding: 14px 28px;
+      font-size: 1.1em;
       background-color: #d8cfc1;
       color: #3e3e3e;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      margin-left: 10px;
+      margin-top: 20px;
       font-weight: bold;
     }
 
     .rezultat {
       margin-top: 40px;
-      font-size: 1.4em;
+      font-size: 1.5em;
       color: #5a4a3f;
     }
 
     .zahvalnica {
       margin-top: 100px;
-      font-size: 0.9em;
+      font-size: 1em;
       color: #a5a5a5;
       font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.5em;
+      }
+
+      p {
+        font-size: 1.1em;
+      }
+
+      .rezultat {
+        font-size: 1.3em;
+      }
+
+      button {
+        width: 80%;
+        max-width: 320px;
+      }
     }
   </style>
 </head>
@@ -66,7 +87,7 @@
   <h1>Dobrodošli na proslavu</h1>
   <p>Unesite ime kako biste saznali broj stola</p>
 
-  <input type="text" id="ime" placeholder="Vaše ime">
+  <input type="text" id="ime" placeholder="Vaše ime"><br>
   <button onclick="nadjiSto()">Prikaži</button>
 
   <div class="rezultat" id="rezultat"></div>
