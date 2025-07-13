@@ -98,24 +98,61 @@
   </div>
 
   <script>
-    const gosti = {
-      "marko": 1,
-      "jovana": 2,
-      "ana petrović": 3,
-      "nikola": 4,
-      "milica": 5
-    };
+  const stolovi = {
+    1: [
+      "Dejan Ignjatović", "Tijana Ignjatović", "Nikola Nikolić", "Nena Nikolić",
+      "Miloš Simonović", "Sandra Simonović", "Bojan Djordjević", "Staša Djordjević",
+      "Dušan Mitrović", "Viktorija Mitrović", "Aleksandar Ilić", "Sanjica Ilić",
+      "Miloš Jočić"
+    ],
+    2: [
+      "Sara Pejčić", "Bojan Stojanović", "Aleksandra Stojanović", "Dimitrije Ćirić",
+      "Miljana Ćirić", "Bane Pop-Krstić", "Ana Stojanović", "Branislav Kostić",
+      "Emina Kostić", "Bojana Minić Dimitrov", "Željko Dimitrov", "Janja Živković",
+      "Dušan Živković"
+    ],
+    3: [
+      "Lazar Vidanović", "Igor Veselinović", "Marija Aleksić", "Filip Antić",
+      "Nemanja Mijalković", "Jovana Mijalković", "Bane Minčić", "Jelena Minčić",
+      "Branko Jovanović", "Vesela Vukova", "Marko Marković", "Milica Marković",
+      "Janko Veselinović", "Tijana Veselinović"
+    ],
+    4: [
+      "Miloš Ćolić", "Bratislava Ćolić", "Dragan Ćolić", "Miroslava Ćolić",
+      "Snežana Lilić", "Dimitrije Lilić", "Aleksandra Krstić", "Vladan Krstić",
+      "Đorđe Mančić", "Sandra Mančić", "Andrija Kostić"
+    ]
+  };
 
-    function nadjiSto() {
-      const unos = document.getElementById("ime").value.trim().toLowerCase();
-      const rezultat = document.getElementById("rezultat");
+  function normalize(str) {
+    return str
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/đ/g, "dj")
+      .replace(/š/g, "s")
+      .replace(/ž/g, "z")
+      .replace(/č/g, "c")
+      .replace(/ć/g, "c");
+  }
 
-      if (gosti[unos]) {
-        rezultat.innerText = `Vaš sto je broj ${gosti[unos]}.`;
-      } else {
-        rezultat.innerText = `Ime nije pronađeno. Proverite unos.`;
+  function nadjiSto() {
+    const unos = document.getElementById("ime").value.trim();
+    const normalizovanoUnos = normalize(unos);
+    const rezultat = document.getElementById("rezultat");
+
+    for (const [sto, gosti] of Object.entries(stolovi)) {
+      for (const gost of gosti) {
+        if (normalize(gost).includes(normalizovanoUnos)) {
+          rezultat.innerText = `Vaš sto je broj ${sto}.`;
+          return;
+        }
       }
     }
-  </script>
+
+    rezultat.innerText = `Ime nije pronađeno. Proverite unos.`;
+  }
+</script>
+
 </body>
 </html>
