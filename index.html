@@ -136,23 +136,47 @@
       .replace(/ć/g, "c");
   }
 
-  function nadjiSto() {
-    const unos = document.getElementById("ime").value.trim();
+  const input = document.getElementById("ime");
+  const rezultat = document.getElementById("rezultat");
+
+  input.addEventListener("input", () => {
+    const unos = input.value.trim();
     const normalizovanoUnos = normalize(unos);
-    const rezultat = document.getElementById("rezultat");
+    rezultat.innerHTML = "";
+
+    if (normalizovanoUnos.length < 2) return;
+
+    const predlozi = [];
 
     for (const [sto, gosti] of Object.entries(stolovi)) {
       for (const gost of gosti) {
         if (normalize(gost).includes(normalizovanoUnos)) {
-          rezultat.innerText = `Vaš sto je broj ${sto}.`;
-          return;
+          predlozi.push({ ime: gost, sto: sto });
         }
       }
     }
 
-    rezultat.innerText = `Ime nije pronađeno. Proverite unos.`;
-  }
+    if (predlozi.length === 0) {
+      rezultat.innerText = "Nema rezultata.";
+    } else {
+      predlozi.forEach(osoba => {
+        const btn = document.createElement("div");
+        btn.textContent = osoba.ime;
+        btn.style.cursor = "pointer";
+        btn.style.padding = "10px";
+        btn.style.borderBottom = "1px solid #ccc";
+        btn.onmouseover = () => btn.style.backgroundColor = "#f0f0f0";
+        btn.onmouseout = () => btn.style.backgroundColor = "transparent";
+        btn.onclick = () => {
+          rezultat.innerHTML = `Vaš sto je broj ${osoba.sto}.`;
+          input.value = osoba.ime;
+        };
+        rezultat.appendChild(btn);
+      });
+    }
+  });
 </script>
+
 
 </body>
 </html>
