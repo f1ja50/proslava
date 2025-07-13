@@ -149,7 +149,7 @@
 
     for (const [sto, gosti] of Object.entries(stolovi)) {
       for (const gost of gosti) {
-        if (normalize(gost).includes(normalizovanoUnos)) {
+        if (normalize(gost).startsWith(normalizovanoUnos)) {
           predlozi.push({ ime: gost, sto: sto });
         }
       }
